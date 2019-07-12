@@ -1,4 +1,4 @@
-EXCHANGE_ID # -* coding: utf-8 -*-
+# -* coding: utf-8 -*-
 #
 # The MIT License (MIT)
 #

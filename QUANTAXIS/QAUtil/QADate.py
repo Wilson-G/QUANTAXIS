@@ -35,33 +35,24 @@ QATZInfo_CN = 'Asia/Shanghai'
 
 def QA_util_time_now():
     """
-    explanation:
-       获取当前日期时间
-    
-    return:
-        datetime
+    返回当前时间
+    :return: 类型datetime.datetime
     """
     return datetime.datetime.now()
 
 
 def QA_util_date_today():
     """
-    explanation:
-       获取当前日期
-
-    return:
-        date
+    返回当前日期
+    :return: 类型datetime.date
     """
     return datetime.date.today()
 
 
 def QA_util_today_str():
     """
-    explanation:
-        返回今天的日期字符串
-    
-    return:
-        str
+    返回今天的日期字符串
+    :return: 类型字符串 2011-11-11
     """
     dt = QA_util_date_today()
     return QA_util_datetime_to_strdate(dt)
@@ -69,23 +60,10 @@ def QA_util_today_str():
 
 def QA_util_date_str2int(date):
     """
-    explanation:
-        转换日期字符串为整数
-    
-    params:
-        * date->
-            含义: 日期字符串
-            类型: date
-            参数支持: []
-    
-    demonstrate:
-        print(QA_util_date_str2int("2011-09-11"))
-
-    return:
-        int
-
-    output:
-        >>20110911
+    日期字符串 '2011-09-11' 变换成 整数 20110911
+    日期字符串 '2018-12-01' 变换成 整数 20181201
+    :param date: str日期字符串
+    :return: 类型int
     """
     # return int(str(date)[0:4] + str(date)[5:7] + str(date)[8:10])
     if isinstance(date, str):
@@ -96,17 +74,9 @@ def QA_util_date_str2int(date):
 
 def QA_util_date_int2str(int_date):
     """
-    explanation:
-        转换日期整数为字符串
-    
-    params:
-        * int_date->
-            含义: 日期转换得
-            类型: int
-            参数支持: []
-    
-    return:
-        str
+    类型datetime.datatime
+    :param date: int 8位整数
+    :return: 类型str
     """
     date = str(int_date)
     if len(date) == 8:
@@ -117,17 +87,9 @@ def QA_util_date_int2str(int_date):
 
 def QA_util_to_datetime(time):
     """
-    explanation:
-        转换字符串格式的日期为datetime
-    
-    params:
-        * time->
-            含义: 日期
-            类型: str
-            参数支持: []
-    
-    return:
-        datetime
+    字符串 '2018-01-01'  转变成 datatime 类型
+    :param time: 字符串str -- 格式必须是 2018-01-01 ，长度10
+    :return: 类型datetime.datatime
     """
     if len(str(time)) == 10:
         _time = '{} 00:00:00'.format(time)
@@ -140,17 +102,8 @@ def QA_util_to_datetime(time):
 
 def QA_util_datetime_to_strdate(dt):
     """
-    explanation:
-        转换字符串格式的日期为datetime
-    
-    params:
-        * dt->
-            含义: 日期时间
-            类型: datetime
-            参数支持: []
-
-    return:
-        str
+    :param dt:  pythone datetime.datetime
+    :return:  1999-02-01 string type
     """
     strdate = "%04d-%02d-%02d" % (dt.year, dt.month, dt.day)
     return strdate
@@ -158,18 +111,8 @@ def QA_util_datetime_to_strdate(dt):
 
 def QA_util_datetime_to_strdatetime(dt):
     """
-    explanation:
-        转换日期时间为字符串格式
-    
-    params:
-        * dt->
-            含义: 日期时间
-            类型: datetime
-            参数支持: []
-
-    return:
-        datetime
-        
+    :param dt:  pythone datetime.datetime
+    :return:  1999-02-01 09:30:91 string type
     """
     strdatetime = "%04d-%02d-%02d %02d:%02d:%02d" % (
         dt.year,
@@ -184,17 +127,9 @@ def QA_util_datetime_to_strdatetime(dt):
 
 def QA_util_date_stamp(date):
     """
-    explanation:
-        转换日期时间字符串为浮点数的时间戳
-    
-    params:
-        * date->
-            含义: 日期时间
-            类型: str
-            参数支持: []
-    
-    return:
-        time
+    字符串 '2018-01-01'  转变成 float 类型时间 类似 time.time() 返回的类型
+    :param date: 字符串str -- 格式必须是 2018-01-01 ，长度10
+    :return: 类型float
     """
     datestr = str(date)[0:10]
     date = time.mktime(time.strptime(datestr, '%Y-%m-%d'))
@@ -203,17 +138,9 @@ def QA_util_date_stamp(date):
 
 def QA_util_time_stamp(time_):
     """
-    explanation:
-       转换日期时间的字符串为浮点数的时间戳
-    
-    params:
-        * time_->
-            含义: 日期时间
-            类型: str
-            参数支持: ['2018-01-01 00:00:00']
-
-    return:
-        time
+    字符串 '2018-01-01 00:00:00'  转变成 float 类型时间 类似 time.time() 返回的类型
+    :param time_: 字符串str -- 数据格式 最好是%Y-%m-%d %H:%M:%S 中间要有空格
+    :return: 类型float
     """
     if len(str(time_)) == 10:
         # yyyy-mm-dd格式
@@ -227,20 +154,14 @@ def QA_util_time_stamp(time_):
 
 
 def QA_util_tdxtimestamp(time_stamp):
+    """转换tdx的realtimeQuote数据
+    https://github.com/rainx/pytdx/issues/187#issuecomment-441270487
 
-    """
-    explanation:
-       转换tdx的realtimeQuote数据, [相关地址](https://github.com/rainx/pytdx/issues/187#issuecomment-441270487)
-    
-    params:
-        * time_stamp->
-            含义: 时间
-            类型: str
-            参数支持: []
+    Arguments:
+        timestamp {[type]} -- [description]
 
-    return:
-        int
-
+    Returns:
+        [type] -- [description]
     """
     if time_stamp is not None:
         time_stamp = str(time_stamp)
@@ -262,51 +183,30 @@ def QA_util_tdxtimestamp(time_stamp):
 
 def QA_util_pands_timestamp_to_date(pandsTimestamp):
     """
-    explanation:
-        转换 pandas 的时间戳 到 datetime.date类型
-    
-    params:
-        * pandsTimestamp->
-            含义: pandas的时间戳
-            类型:  pandas._libs.tslib.Timestamp
-            参数支持: []
-    return:
-        date
+    转换 pandas 的时间戳 到 datetime.date类型
+    :param pandsTimestamp: 类型 pandas._libs.tslib.Timestamp
+    :return: datetime.datetime类型
     """
     return pandsTimestamp.to_pydatetime().date()
 
 
 def QA_util_pands_timestamp_to_datetime(pandsTimestamp):
     """
-    explanation:
-        转换 pandas时间戳 到 datetime.datetime类型
-    
-    params:
-        * pandsTimestamp->
-            含义: pandas时间戳
-            类型:  pandas._libs.tslib.Timestamp
-            参数支持: []
-    return:
-        datetime
+    转换 pandas 的时间戳 到 datetime.datetime类型
+    :param pandsTimestamp: 类型 pandas._libs.tslib.Timestamp
+    :return: datetime.datetime类型
     """
     return pandsTimestamp.to_pydatetime()
 
 
 def QA_util_stamp2datetime(timestamp):
     """
-    explanation:
-        datestamp转datetime,pandas转出来的timestamp是13位整数 要/1000,
-        It’s common for this to be restricted to years from 1970 through 2038.
-        从1970年开始的纳秒到当前的计数 转变成 float 类型时间 类似 time.time() 返回的类型
-    
-    params:
-        * timestamp->
-            含义: 时间戳
-            类型: float
-            参数支持: []
-    
-    return:
-        datetime
+    datestamp转datetime
+    pandas转出来的timestamp是13位整数 要/1000
+    It’s common for this to be restricted to years from 1970 through 2038.
+    从1970年开始的纳秒到当前的计数 转变成 float 类型时间 类似 time.time() 返回的类型
+    :param timestamp: long类型
+    :return: 类型float
     """
     try:
         return datetime.datetime.fromtimestamp(timestamp)
@@ -325,34 +225,18 @@ def QA_util_stamp2datetime(timestamp):
 
 def QA_util_ms_stamp(ms):
     """
-    explanation:
-        直接返回不做处理
-
-    params:
-        * ms->
-            含义: 时间戳
-            类型: float
-            参数支持: []
-    return:
-        float
+    直接返回不做处理
+    :param ms:  long类型 -- tick count
+    :return: 返回ms
     """
-    
     return ms
 
 
 def QA_util_date_valid(date):
     """
-    explanation:
-        判断字符串格式(1982-05-11)
-
-    params:
-        * date->
-            含义: 日期
-            类型: str
-            参数支持: []
-    
-    return:
-        bool
+    判断字符串是否是 1982-05-11 这种格式
+    :param date: date 字符串str -- 格式 字符串长度10
+    :return: boolean -- 格式是否正确
     """
     try:
         time.strptime(date, "%Y-%m-%d")
@@ -363,21 +247,10 @@ def QA_util_date_valid(date):
 
 def QA_util_realtime(strtime, client):
     """
-    explanation:
-        查询数据库中的数据
-
-    params:
-        * strtime->
-            含义: 日期
-            类型: str
-            参数支持: []
-        * client->
-            含义: 源
-            类型: pymongo.MongoClient
-            参数支持: []
-
-    return:
-        dict
+    查询数据库中的数据
+    :param strtime: strtime  str字符串                 -- 1999-12-11 这种格式
+    :param client: client  pymongo.MongoClient类型    -- mongodb 数据库 从 QA_util_sql_mongo_setting 中 QA_util_sql_mongo_setting 获取
+    :return: Dictionary  -- {'time_real': 时间,'id': id}
     """
     time_stamp = QA_util_date_stamp(strtime)
     coll = client.quantaxis.trade_date
@@ -389,21 +262,10 @@ def QA_util_realtime(strtime, client):
 
 def QA_util_id2date(idx, client):
     """
-    explanation:
-         从数据库中查询通达信时间
-
-    params:
-        * idx->
-            含义: 数据库index
-            类型: str
-            参数支持: []
-        * client->
-            含义: 源
-            类型: pymongo.MongoClient
-            参数支持: []
-
-    return:
-        str
+    从数据库中查询 通达信时间
+    :param idx: 字符串 -- 数据库index
+    :param client: pymongo.MongoClient类型    -- mongodb 数据库 从 QA_util_sql_mongo_setting 中 QA_util_sql_mongo_setting 获取
+    :return:         Str -- 通达信数据库时间
     """
     coll = client.quantaxis.trade_date
     temp_str = coll.find_one({'num': idx})
@@ -412,25 +274,12 @@ def QA_util_id2date(idx, client):
 
 def QA_util_is_trade(date, code, client):
     """
-    explanation:
-        从数据库中查询判断是否是交易日
-
-    params:
-        * date->
-            含义: 日期
-            类型: str
-            参数支持: []
-        * code->
-            含义: 代码
-            类型: str
-            参数支持: []
-        * client->
-            含义: 源
-            类型: pymongo.MongoClient
-            参数支持: []
-
-    return:
-        bool
+    判断是否是交易日
+    从数据库中查询
+    :param date: str类型 -- 1999-12-11 这种格式    10位字符串
+    :param code: str类型 -- 股票代码 例如 603658 ， 6位字符串
+    :param client: pymongo.MongoClient类型    -- mongodb 数据库 从 QA_util_sql_mongo_setting 中 QA_util_sql_mongo_setting 获取
+    :return:  Boolean -- 是否是交易时间
     """
     coll = client.quantaxis.stock_day
     date = str(date)[0:10]
@@ -444,76 +293,25 @@ def QA_util_is_trade(date, code, client):
 
 def QA_util_get_date_index(date, trade_list):
     """
-    explanation:
-        返回在trade_list中的index位置
-
-    params:
-        * date->
-            含义: 日期
-            类型: str
-            参数支持: []
-        * trade_list->
-            含义: 代码
-            类型: ??
-            参数支持: []
-        
-    return:
-        ??
+    返回在trade_list中的index位置
+    :param date: str类型 -- 1999-12-11 这种格式    10位字符串
+    :param trade_list: ？？
+    :return: ？？
     """
     return trade_list.index(date)
 
 
 def QA_util_get_index_date(id, trade_list):
     """
-    explanation:
-        根据id索引值
-
-    params:
-        * id->
-            含义: 日期
-            类型: str
-            参数支持: []
-        * trade_list->
-            含义: 代码
-            类型: dict
-            参数支持: []
-        
-    return:
-        ??
+    :param id:  ：？？
+    :param trade_list:  ？？
+    :return: ？？
     """
     return trade_list[id]
 
 
 def QA_util_select_hours(time=None, gt=None, lt=None, gte=None, lte=None):
-    """
-    explanation:
-        quantaxis的时间选择函数,约定时间的范围,比如早上9点到11点
-
-    params:
-        * time->
-            含义: 时间
-            类型: str
-            参数支持: []
-        * gt->
-            含义: 大于
-            类型: Any
-            参数支持: []
-        * lt->
-            含义: 小于
-            类型: Any
-            参数支持: []
-        * gte->
-            含义: 大于等于
-            类型: Any
-            参数支持: []
-        * lte->
-            含义: 小于等于
-            类型: Any
-            参数支持: []
-
-    return:
-        bool
-    """
+    'quantaxis的时间选择函数,约定时间的范围,比如早上9点到11点'
     if time is None:
         __realtime = datetime.datetime.now()
     else:
@@ -564,33 +362,13 @@ def QA_util_select_hours(time=None, gt=None, lt=None, gte=None, lte=None):
 
 def QA_util_select_min(time=None, gt=None, lt=None, gte=None, lte=None):
     """
-    explanation:
-        择分钟
-
-    params:
-        * time->
-            含义: 时间
-            类型: str
-            参数支持: []
-        * gt->
-            含义: 大于等于
-            类型: Any
-            参数支持: []
-        * lt->
-            含义: 小于
-            类型: Any
-            参数支持: []
-        * gte->
-            含义: 大于等于
-            类型: Any
-            参数支持: []
-        * lte->
-            含义: 小于等于
-            类型: Any
-            参数支持: []
-
-    return:
-        bool
+    'quantaxis的时间选择函数,约定时间的范围,比如30分到59分'
+    :param time:
+    :param gt:
+    :param lt:
+    :param gte:
+    :param lte:
+    :return:
     """
     if time is None:
         __realtime = datetime.datetime.now()
@@ -641,18 +419,12 @@ def QA_util_select_min(time=None, gt=None, lt=None, gte=None, lte=None):
 
 def QA_util_time_delay(time_=0):
     """
-    explanation:
-        这是一个用于复用/比如说@装饰器的延时函数,使用threading里面的延时,为了是不阻塞进程,
-        有时候,同时发进去两个函数,第一个函数需要延时,第二个不需要的话,用sleep就会阻塞掉第二个进程
-
-    params:
-        * time_->
-            含义: 时间
-            类型: time
-            参数支持: []
-        
-    return:
-        func
+    '这是一个用于复用/比如说@装饰器的延时函数\
+    使用threading里面的延时,为了是不阻塞进程\
+    有时候,同时发进去两个函数,第一个函数需要延时\
+    第二个不需要的话,用sleep就会阻塞掉第二个进程'
+    :param time_:
+    :return:
     """
 
     def _exec(func):
@@ -663,25 +435,11 @@ def QA_util_time_delay(time_=0):
 
 def QA_util_calc_time(func, *args, **kwargs):
     """
-    explanation:
-        耗时长度的装饰器
-
-    params:
-        * func ->
-            含义: 被装饰的函数
-            类型: func
-            参数支持: []
-        * args ->
-            含义: 函数接受的任意元组参数
-            类型: tuple
-            参数支持: []
-        * kwargs ->
-            含义: 函数接受的任意字典参数
-            类型: dict
-            参数支持: []
-
-    return:
-        None
+    '耗时长度的装饰器'
+    :param func:
+    :param args:
+    :param kwargs:
+    :return:
     """
     _time = datetime.datetime.now()
     func(*args, **kwargs)

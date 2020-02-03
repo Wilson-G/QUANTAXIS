@@ -146,8 +146,6 @@ def QA_quotation_adv(code, start, end=save_tdx.now_time(), frequence='1min',
                     # 返回的是QA_DataStruct_Stock_day对象，为了与在线获取的数据格式保持统一，转成单索引
                     res = QAQueryAdv.QA_fetch_stock_day_adv(
                         code, start, end).data.reset_index(level='code')
-                    # res = QAQueryAdv.QA_fetch_stock_day_adv(
-                    #     code, start, end).data.reset_index(level='code')[:14]
                     start_date = res.index[-1]
                     end_date = pd.Timestamp(end)
                     if end_date-start_date > datetime.timedelta(hours=17):
@@ -182,8 +180,6 @@ def QA_quotation_adv(code, start, end=save_tdx.now_time(), frequence='1min',
                     # 返回的是QA_DataStruct_Stock_day对象，为了与在线获取的数据格式保持统一，转成单索引
                     res = QAQueryAdv.QA_fetch_stock_min_adv(
                         code, start, end, frequence=frequence).data.reset_index(level='code')
-                    # res = QAQueryAdv.QA_fetch_stock_min_adv(
-                    #     code, start, end, frequence=frequence).data.reset_index(level='code')[:710]
                     start_date = res.index[-1]
                     end_date = pd.Timestamp(end)
                     if end_date > start_date:
@@ -439,12 +435,14 @@ class AsyncFetcher():
 
 if __name__ == '__main__':
     # import asyncio
-    # print(QA_quotation_adv('000001', '2020-01-01', '2020-02-03', frequence=FREQUENCE.DAY,
+    # print(QA_quotation_adv('000001', '2020-01-01', '2020-01-22', frequence=FREQUENCE.DAY,
     #                        market=MARKET_TYPE.STOCK_CN, source=DATASOURCE.AUTO, output=OUTPUT_FORMAT.DATAFRAME))
-    # print(QA_quotation_adv('000001', '2020-01-22', '2020-02-03 15:00:00', frequence=FREQUENCE.ONE_MIN,
-    #                        market=MARKET_TYPE.STOCK_CN, source=DATASOURCE.AUTO, output=OUTPUT_FORMAT.DATAFRAME))
-    print(QA_quotation_adv('000001', '2019-12-01', '2020-02-03', frequence=FREQUENCE.WEEK,
+    # print(QA_quotation_adv('000001', '2020-01-22', '2020-01-23 14:54:00', frequence=FREQUENCE.ONE_MIN,
+    #                 market=MARKET_TYPE.STOCK_CN, source=DATASOURCE.AUTO, output=OUTPUT_FORMAT.DATAFRAME))
+    print(QA_quotation_adv('000001', '2020-01-22', '2020-01-23 15:00:00', frequence=FREQUENCE.ONE_MIN,
                            market=MARKET_TYPE.STOCK_CN, source=DATASOURCE.AUTO, output=OUTPUT_FORMAT.DATAFRAME))
+    # print(QA_quotation_adv('000001', '2019-12-01', '2020-01-23', frequence=FREQUENCE.WEEK,
+    #                   market=MARKET_TYPE.STOCK_CN, source=DATASOURCE.AUTO, output=OUTPUT_FORMAT.DATAFRAME))
     # Fetcher = AsyncFetcher()
     # loop = asyncio.get_event_loop()
     # res = loop.run_until_complete(asyncio.gather(
